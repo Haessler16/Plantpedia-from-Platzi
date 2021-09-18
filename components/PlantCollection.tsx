@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { Image } from './Image'
 import { Grid, GridProps } from '@ui/Grid'
 import { Typography } from '@ui/Typography'
 import { Button } from '@ui/Button'
@@ -54,7 +55,13 @@ export function PlantEntrySquare({ image, plantName, slug }: Plant) {
     <Link href={`/entry/${slug}`}>
       <a title={`Go to ${plantName}`}>
         <div className="opacity-95 hover:opacity-100">
-          <img src={image.url} width={460} />
+          <Image
+            src={image.url}
+            layout="responsive"
+            width={460}
+            aspectRatio="4:3"
+            fit="scale"
+          />
           <div className="p-4">
             <Typography variant="h4" className="break-words">
               {plantName}
@@ -78,7 +85,12 @@ export function PlantEntryInline({
         <div
           className={`opacity-95 hover:opacity-100 flex items-end ${className}`}
         >
-          <img src={image.url} width={84} className="flex-none" />
+          <Image
+            src={image.url}
+            width={624}
+            layout="intrinsic"
+            aspectRatio="9:12"
+          />
           <div className="pl-2 flex-auto">
             <Typography variant="h6" className="break-words">
               {plantName}
