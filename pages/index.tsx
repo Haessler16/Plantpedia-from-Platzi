@@ -22,7 +22,7 @@ export default function Home({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Layout>
-      <Hero {...plants[0]} className="mb" />
+      <Hero {...plants[0]} className="mb-20" />
       <Authors className="mb-10" />
       <PlantCollection
         plants={plants.slice(1, 3)}

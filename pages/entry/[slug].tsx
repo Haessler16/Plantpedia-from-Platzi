@@ -41,6 +41,7 @@ type PlantsEntryProps = {
 
 export const getStaticProps: GetStaticProps<PlantsEntryProps> = async ({
   params,
+  preview,
 }) => {
   const slug = params?.slug
 
@@ -51,7 +52,7 @@ export const getStaticProps: GetStaticProps<PlantsEntryProps> = async ({
   }
 
   try {
-    const plant = await getPlant(slug)
+    const plant = await getPlant(slug, preview)
     const otherEntries = await getPlantList({ limit: 5 })
     const categories = await getCategoryList({ limit: 10 })
 
