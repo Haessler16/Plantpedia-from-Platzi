@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { Header } from '@components/Header/Header'
+import { Header } from '@components/Header'
 import { Footer } from '@components/Footer'
 
 type LayoutProps = { title?: string }

@@ -1,5 +1,5 @@
-import { GetStaticProps, InferGetStaticPropsType } from 'next'
-
+import { GetStaticProps, GetStaticPaths, InferGetStaticPropsType } from 'next'
+import flatMap from 'lodash/flatMap'
 import { getPlant, getPlantList, getCategoryList } from '@api'
 import Link from 'next/link'
 
@@ -16,14 +16,23 @@ type PathType = {
   params: {
     slug: string
   }
+  locale: string
 }
 
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
+  if (locales === undefined) {
+    throw new Error(
+      'Uh, did you forget to configure locales in your next.config file'
+    )
+  }
   const entries = await getPlantList({ limit: 10 })
 
-  const paths: PathType[] = entries.map((plant) => ({
-    params: { slug: plant.slug },
-  }))
+  const paths: PathType[] = flatMap(
+    entries.map(({ slug }) => ({
+      params: { slug },
+    })),
+    (path) => locales.map((loc) => ({ locale: loc, ...path }))
+  )
 
   return {
     paths,
@@ -42,6 +51,7 @@ type PlantsEntryProps = {
 export const getStaticProps: GetStaticProps<PlantsEntryProps> = async ({
   params,
   preview,
+  locale,
 }) => {
   const slug = params?.slug
 
@@ -52,7 +62,7 @@ export const getStaticProps: GetStaticProps<PlantsEntryProps> = async ({
   }
 
   try {
-    const plant = await getPlant(slug, preview)
+    const plant = await getPlant(slug, preview, locale)
     const otherEntries = await getPlantList({ limit: 5 })
     const categories = await getCategoryList({ limit: 10 })
 
