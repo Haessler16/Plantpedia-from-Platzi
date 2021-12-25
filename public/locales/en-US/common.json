@@ -3,5 +3,7 @@
   "gettingStarted": "Getting started",
   "search": "Search",
   "topStories": "Top stories",
-  "language": "Language"
+  "language": "Language",
+  "login": "Sign In",
+  "logout": "Sign Out"
 }

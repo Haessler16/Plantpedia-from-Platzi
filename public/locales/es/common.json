@@ -3,5 +3,7 @@
   "gettingStarted": "Iniciando",
   "search": "Buscar",
   "topStories": "Top de historias",
-  "language": "Lenguaje"
+  "language": "Lenguaje",
+  "login": "Iniciar Session",
+  "logout": "Cerrar Session"
 }
