@@ -21,6 +21,7 @@
     "paths": {
       "@ui/*": ["ui/*"],
       "@api/*": ["api/*"],
+      "@auth/*": ["auth/*"],
       "@api": ["api/index.ts"],
       "@components/*": ["components/*"]
     }

@@ -1,13 +1,20 @@
 import NextAuth from 'next-auth'
 import type { NextAuthOptions } from 'next-auth'
 import Providers from 'next-auth/providers'
-import { Provider } from 'next-auth/client'
 
 const options: NextAuthOptions = {
   theme: 'light',
-  debug: true,
-  session: {},
-  jwt: {},
+  // debug: true,
+  session: {
+    jwt: true,
+    maxAge: 60 * 15, // 15min
+  },
+  jwt: {
+    secret: process.env.JWT_SECRET,
+    signingKey: process.env.JWT_SIGNING_KEY,
+    encryption: true,
+    encryptionKey: process.env.JWT_ENCRYPTION_KEY,
+  },
   providers: [
     Providers.Credentials({
       name: 'platzi',
